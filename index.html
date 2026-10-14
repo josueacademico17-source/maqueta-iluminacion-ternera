@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maqueta 3D · Iluminación vía de Ternera</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="scene"></canvas>
+
+  <div id="loader">
+    <div class="spinner"></div>
+    <p>Cargando maqueta 3D…</p>
+  </div>
+
+  <!-- Encabezado -->
+  <header id="titlebar" class="glass ui">
+    <span class="kicker">Maqueta digital 3D · Mejoramiento del alumbrado público</span>
+    <h1>Vía de Ternera — Cartagena, Colombia</h1>
+  </header>
+
+  <div id="badge" class="glass ui">
+    <span id="badgeScenario" class="tag tag-before">ANTES</span>
+    <span id="badgeTime" class="tag tag-day">DÍA</span>
+    <span id="badgeView" class="muted">Vista aérea</span>
+  </div>
+
+  <!-- Panel izquierdo: información del proyecto -->
+  <aside id="infoPanel" class="glass ui panel">
+    <div class="panel-head">
+      <h2>Proyecto</h2>
+      <button class="icon-btn" data-collapse="infoPanel" title="Contraer panel">–</button>
+    </div>
+    <div class="panel-body">
+      <details open>
+        <summary>Ubicación</summary>
+        <p>Av. Pedro de Heredia / Troncal del Caribe, sector Ternera, Cartagena (Bolívar).</p>
+        <p class="mono">10.379556, −75.463064</p>
+        <p><a href="https://maps.app.goo.gl/QiiZMfvhk3BTqfmE6" target="_blank" rel="noopener">Abrir en Google Maps ↗</a></p>
+        <p class="muted">Referencia visual: Google Street View, oct–nov 2025.</p>
+      </details>
+
+      <details open>
+        <summary>Alcance de la muestra</summary>
+        <p>Segmento ilustrativo de <b>≈180 m</b>, no el corredor completo. Las luminarias que se ven son una <b>selección coherente</b> del proyecto, <b>no el inventario total</b>.</p>
+        <div class="stats">
+          <div><span id="cntNew">6</span><small>nuevas en la muestra</small></div>
+          <div><span id="cntReloc">2</span><small>reubicadas en la muestra</small></div>
+          <div><span id="cntExist">3</span><small>existentes en la muestra</small></div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>Datos del proyecto (Excel · MML)</summary>
+        <ul class="facts">
+          <li><b>20</b> luminarias nuevas con sus postes <span class="src">ACT.1.2</span></li>
+          <li><b>8</b> luminarias existentes reubicadas <span class="src">ACT.1.3</span></li>
+          <li><b>30</b> luminarias LED de bajo consumo <span class="src">ACT.3.1</span></li>
+          <li>Mantenimiento preventivo y correctivo de las existentes <span class="src">C2</span></li>
+          <li>Ejecución: 1 dic 2026 – 15 abr 2027</li>
+        </ul>
+        <p class="sub">Metas (indicadores del Excel)</p>
+        <ul class="facts">
+          <li>≥ 90 % de los puntos medidos alcanzan la iluminancia mínima del RETILAP <span class="src">Propósito</span></li>
+          <li>≥ 95 % de las luminarias existentes en funcionamiento <span class="src">C2</span></li>
+          <li>≥ 40 % de reducción del consumo energético del tramo <span class="src">C3</span></li>
+          <li>150 habitantes sensibilizados en 4 jornadas <span class="src">ACT.3.2</span></li>
+        </ul>
+        <p class="muted">Son metas del proyecto, no resultados medidos. Se verifican con luxómetro e interventoría.</p>
+      </details>
+
+      <details>
+        <summary>Aproximaciones y limitaciones</summary>
+        <ul class="facts warn">
+          <li>El Excel <b>no especifica</b> potencia, flujo luminoso, temperatura de color, altura de montaje, interdistancia ni la ubicación de cada luminaria.</li>
+          <li>Altura de montaje e interdistancia de las nuevas: <b>valores editables</b> (panel derecho).</li>
+          <li>Anchos de carril, separador y andenes: estimados visualmente a partir de las fotos.</li>
+          <li>La calzada opuesta no se aprecia bien en las fotos; se modela simétrica.</li>
+          <li>La posición y el estado (falla o baja intensidad) de las existentes en la muestra son <b>ilustrativos</b>. El estado real sale del diagnóstico (ACT.2.1).</li>
+          <li>Ámbar = tecnología actual supuesta; blanco = LED. El color real no está en el Excel.</li>
+          <li>El Excel indica 20 nuevas + 8 reubicadas (28) y 30 LED; no aclara a qué corresponden las 2 restantes.</li>
+          <li>La hoja «Resumen» (presupuesto) tiene referencias rotas (#REF!) y no aporta datos.</li>
+          <li>La luz es una <b>simulación visual</b>, no un cálculo fotométrico certificado.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Atajos de teclado</summary>
+        <ul class="keys">
+          <li><kbd>Q</kbd> Antes · <kbd>W</kbd> Después</li>
+          <li><kbd>N</kbd> Día / Noche</li>
+          <li><kbd>1</kbd> Aérea · <kbd>2</kbd> Planta · <kbd>3</kbd> Peatón · <kbd>4</kbd> Conductor</li>
+          <li><kbd>R</kbd> Recorrido peatonal</li>
+          <li><kbd>C</kbd> Conos · <kbd>M</kbd> Mapa · <kbd>L</kbd> Etiquetas</li>
+          <li><kbd>H</kbd> Ocultar / mostrar paneles</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>Equipo</summary>
+        <p>Ornella Gómez Meusburger · Josué David Ortega de Arco · Paula Anillo Señas</p>
+        <p class="muted">Revisado por: Prof. Yunaris Coneo</p>
+      </details>
+    </div>
+  </aside>
+
+  <!-- Panel derecho: leyenda y parámetros -->
+  <aside id="sidePanel" class="glass ui panel">
+    <div class="panel-head">
+      <h2>Leyenda</h2>
+      <button class="icon-btn" data-collapse="sidePanel" title="Contraer panel">–</button>
+    </div>
+    <div class="panel-body">
+      <ul class="legend">
+        <li><i class="dot existing"></i>Luminaria existente</li>
+        <li><i class="dot new"></i>Luminaria nueva (LED + poste)</li>
+        <li><i class="dot relocated"></i>Luminaria reubicada</li>
+        <li><i class="dot utility"></i>Poste de red eléctrica (contexto)</li>
+        <li><i class="swatch amber"></i>Luz actual (ámbar, supuesta)</li>
+        <li><i class="swatch led"></i>Luz LED propuesta</li>
+      </ul>
+
+      <h3>Capas</h3>
+      <label class="switch"><input type="checkbox" id="tglCones" checked /><span></span>Conos de luz</label>
+      <label class="switch"><input type="checkbox" id="tglHeat" /><span></span>Mapa de distribución</label>
+      <label class="switch"><input type="checkbox" id="tglLabels" checked /><span></span>Etiquetas</label>
+      <label class="switch"><input type="checkbox" id="tglMarkers" checked /><span></span>Marcadores en el piso</label>
+      <label class="switch"><input type="checkbox" id="tglTraffic" checked /><span></span>Tráfico</label>
+
+      <div id="heatLegend" class="heat-legend hidden">
+        <div class="bar"></div>
+        <div class="row"><span>Bajo</span><span>Alto</span></div>
+        <p class="muted">Distribución relativa con un modelo simple de fuente puntual. Es ilustrativa, <b>no es un cálculo RETILAP</b>.</p>
+      </div>
+
+      <h3>Parámetros (aproximados)</h3>
+      <label class="range">
+        <span>Altura de montaje <b id="valH">10 m</b></span>
+        <input type="range" id="rngH" min="6" max="14" step="0.5" value="10" />
+      </label>
+      <label class="range">
+        <span>Interdistancia nuevas <b id="valS">30 m</b></span>
+        <input type="range" id="rngS" min="20" max="45" step="1" value="30" />
+      </label>
+      <label class="range">
+        <span>Intensidad visual <b id="valP">100 %</b></span>
+        <input type="range" id="rngP" min="40" max="180" step="5" value="100" />
+      </label>
+      <p class="muted">Estos valores no salen del Excel. Ajústalos cuando tengan el diseño fotométrico.</p>
+    </div>
+  </aside>
+
+  <!-- Barra de control -->
+  <nav id="dock" class="glass ui">
+    <div class="group">
+      <span class="glabel">Escenario</span>
+      <div class="seg" id="segScenario">
+        <button data-scenario="before" class="active">Antes</button>
+        <button data-scenario="after">Después</button>
+      </div>
+    </div>
+    <div class="group">
+      <span class="glabel">Ambiente</span>
+      <div class="seg" id="segTime">
+        <button data-time="day" class="active">☀ Día</button>
+        <button data-time="night">☾ Noche</button>
+      </div>
+    </div>
+    <div class="group">
+      <span class="glabel">Vista</span>
+      <div class="seg" id="segView">
+        <button data-view="aerial" class="active">Aérea</button>
+        <button data-view="plan">Planta</button>
+        <button data-view="street">Peatón</button>
+        <button data-view="driver">Conductor</button>
+        <button data-view="walk">▶ Recorrido</button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="tooltip" class="glass hidden"></div>
+  <div id="disclaimer" class="ui">Reconstrucción aproximada basada en fotografías · Simulación visual, no fotométrica</div>
+  <button id="showUi" class="glass hidden" title="Mostrar paneles (H)">Mostrar paneles</button>
+
+  <!-- Three.js r147 (build clásico, funciona abriendo el archivo con doble clic).
+       Primero intenta la copia local en lib/; si no existe, usa el CDN. -->
+  <script src="lib/three.min.js"></script>
+  <script>
+    if (!window.THREE) document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"><\/script>');
+  </script>
+  <script src="lib/OrbitControls.js"></script>
+  <script>
+    if (window.THREE && !THREE.OrbitControls) document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"><\/script>');
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
